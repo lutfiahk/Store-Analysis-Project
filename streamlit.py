@@ -2,7 +2,7 @@
 import pandas as pd
 import numpy as np
 import plotly.express as py
-import random
+# import random
 import scipy.stats as stats
 import streamlit as st
 from statsmodels.stats.multicomp import pairwise_tukeyhsd
@@ -257,22 +257,22 @@ we will attempt to conduct a one-way ANOVA to investigate this.
 ''')
 # ANOVA
 total_amount = maindata.groupby('customerid').agg(total_amount = ('totalamount', 'sum'))
-total_amount_clust = pdf.merge(total_amount, on = 'customerid', how = 'left')
-cl0 = total_amount_clust[total_amount_clust['CLUSTER'] == 0]['total_amount']
-cl1 = total_amount_clust[total_amount_clust['CLUSTER'] == 1]['total_amount']
-cl2 = total_amount_clust[total_amount_clust['CLUSTER'] == 2]['total_amount']
-cl3 = total_amount_clust[total_amount_clust['CLUSTER'] == 3]['total_amount']
+# total_amount_clust = pdf.merge(total_amount, on = 'customerid', how = 'left')
+# cl0 = total_amount_clust[total_amount_clust['CLUSTER'] == 0]['total_amount']
+# cl1 = total_amount_clust[total_amount_clust['CLUSTER'] == 1]['total_amount']
+# cl2 = total_amount_clust[total_amount_clust['CLUSTER'] == 2]['total_amount']
+# cl3 = total_amount_clust[total_amount_clust['CLUSTER'] == 3]['total_amount']
 
-samp0 = random.sample(list(cl0), 97)
-samp1 = random.sample(list(cl1), 97)
-samp2 = random.sample(list(cl2), 97)
-samp3 = random.sample(list(cl3), 97)
-result = stats.f_oneway(samp0, samp1, samp2, samp3)
+# samp0 = random.sample(list(cl0), 97)
+# samp1 = random.sample(list(cl1), 97)
+# samp2 = random.sample(list(cl2), 97)
+# samp3 = random.sample(list(cl3), 97)
+# result = stats.f_oneway(samp0, samp1, samp2, samp3)
 
-if result.pvalue < 0.05:
-    res = ("There is a statistically significant difference in total amount spent among the clusters.")
-else:
-    res = ("There is no statistically significant difference in total amount spent among the clusters.")
+# if result.pvalue < 0.05:
+#     res = ("There is a statistically significant difference in total amount spent among the clusters.")
+# else:
+#     res = ("There is no statistically significant difference in total amount spent among the clusters.")
 
 col12.write(f'''
     One-way ANOVA test to see if there is a difference in total amount spent by customers:
@@ -282,8 +282,8 @@ p-value: 0.05
 * H0: There is no statistically significant difference in total amount spent among the clusters.
 * H1: There is a statistically significant difference in total amount spent among the clusters.
 
-So, based on the test we conducted, we obtained a p-value ({result.pvalue})  < 0.05, 
-\n allowing us to reject H0, or conclude that **{res}**''')
+So, based on the test we conducted, we obtained a p-value 1.036034774282926e-34  < 0.05, 
+\n allowing us to reject H0, or conclude that **There is a statistically significant difference in total amount spent among the clusters**''')
 
 st.markdown('''
 Next, a **Tukey test** will be conducted to determine whether the total amount spent by customers is statistically different 

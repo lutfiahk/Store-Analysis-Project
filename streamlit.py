@@ -21,10 +21,10 @@ transactionbydate = transactionbydate.rename(columns = {'TransactionID':'Total_T
 
 # Build App
 st.set_page_config(layout="wide")
-st.image('Dataset\store.jpg', use_column_width=True)
+st.image('Dataset/store.jpg', use_column_width=True)
 col1, col2= st.columns([1, 5])
 col1.write('')
-col1.image('Dataset\image.png', width = 140)
+col1.image('Dataset/image.png', width = 140)
 col2.header('Kalbe Nutritionals Store Analysis')
 col2.subheader('Final Project of Data Scientist VIX')
 col2.text('by : Lutfia Husna Khoirunnisa (https://github.com/lutfiahk)')
@@ -193,7 +193,7 @@ st.markdown('''
 
 col1, col2= st.columns([1.2,2.5])
 
-col1.image('Dataset\output.png', width = 320)
+col1.image('Dataset/output.png', width = 320)
 col2.write('\n')
 col2.markdown('''To determine the most suitable number of clusters or groups for segmenting the data, we'll carry out an elbow test 
             and silhouette test. These tests help pinpoint the optimal number of customer segments. From these tests, we find that 
@@ -209,14 +209,14 @@ st.markdown('**Based on the obtained cluster groups, there are 4 clients charact
 c1, c2, c3 = st.columns([1,0.1,1])
 with c1.container():
    c1, c2 = st.columns([0.3,2])
-   c1.image('Dataset\img1.png')
+   c1.image('Dataset/img1.png')
    c2.markdown('''
   *  Customers in the Cluster 0 tend to have high income and medium transaction activity. This group of customers also 
 tends to be older compared to the other groups.
                \n\n\n
 ''')
    c1, c2 = st.columns([0.3,2])
-   c1.image('Dataset\img2.png')
+   c1.image('Dataset/img2.png')
    c2.markdown('''
   *  Customers in the Cluster 1 tends to have low income with low transaction activity. This group of customers also 
 tends to be younger compared to the other groups.
@@ -224,13 +224,13 @@ tends to be younger compared to the other groups.
 
 with c3.container():
    c1, c2 = st.columns([0.3,2])
-   c1.image('Dataset\img3.png')
+   c1.image('Dataset/img3.png')
    c2.markdown('''
   *  Customers in the Cluster 2 tend to have medium income and medium transaction activity. This group of customers also 
 tends to have not made transactions for a long time or are inactive customers.
 ''')
    c1, c2 = st.columns([0.3,2])
-   c1.image('Dataset\img4.png')
+   c1.image('Dataset/img4.png')
    c2.markdown('''
   * Customers in the Cluster 3 tend to have low income with high transaction activity. This group of customers also tends 
 to be in the middle age and are active customers.

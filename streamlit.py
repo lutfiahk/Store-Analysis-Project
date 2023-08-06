@@ -2,7 +2,6 @@
 import pandas as pd
 import numpy as np
 import plotly.express as py
-# import random
 import scipy.stats as stats
 import streamlit as st
 from statsmodels.stats.multicomp import pairwise_tukeyhsd
@@ -13,11 +12,8 @@ from statsmodels.stats.multicomp import pairwise_tukeyhsd
 customer = pd.read_csv('Dataset/customerbydate.csv', sep = ';')
 transaction = pd.read_csv('Dataset/transactionbydate.csv', sep = ';')
 maindata = pd.read_csv('Dataset/main_table.csv', sep = ',')
-transaction2 = pd.read_csv('Dataset/Case Study - Transaction.csv', sep = ';')
-# transaction2['Date'] = pd.to_datetime(transaction2['Date'])
-transactionbydate = transaction2.groupby('Date').agg({'TransactionID': 'nunique','CustomerID':'nunique', 'TotalAmount':'sum', 'Qty':'sum'}).reset_index()
-transactionbydate = transactionbydate.rename(columns = {'TransactionID':'Total_Transaction', 'CustomerID':'Total_Customer', 'Qty':'Total_Qty'})
-
+transaction2 = pd.read_csv('Dataset/transaction2.csv', sep = ';')
+transactionbydate = pd.read_csv('Dataset/transactionbydate.csv')
 
 # Build App
 st.set_page_config(layout="wide")

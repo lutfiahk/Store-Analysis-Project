@@ -12,7 +12,7 @@ from statsmodels.stats.multicomp import pairwise_tukeyhsd
 customer = pd.read_csv('Dataset/customerbydate.csv', sep = ';')
 transaction = pd.read_csv('Dataset/transactionbydate.csv', sep = ';')
 maindata = pd.read_csv('Dataset/main_table.csv', sep = ',')
-transaction2 = pd.read_csv('Dataset/transaction2.csv', sep = ';')
+transaction2 = pd.read_csv('Dataset/transaction2.csv', sep = ',')
 transactionbydate = pd.read_csv('Dataset/transactionbydate.csv')
 
 # Build App
@@ -80,9 +80,6 @@ st.plotly_chart(store_map)
 
 
 # Store Trend
-transaction2['Date'] = pd.to_datetime(transaction2['Date'])
-transaction2['Month'] = pd.to_datetime(transaction2['Date']).dt.month
-transaction2['Monthname'] = transaction2['Month'].replace({1:'Jan', 2:'Feb', 3:'Mar', 4:'Apr', 5:'May', 6: 'Jun', 7:'Jul', 8:'Aug', 9:'Sep', 10:'Oct', 11:'Nov', 12:'Dec'})
 transactionbydate = transaction2.groupby(['Month','Monthname']).agg({'TransactionID': 'nunique','CustomerID':'nunique', 'TotalAmount':'sum', 'Qty':'sum'}).reset_index()
 transactionbydate = transactionbydate.rename(columns = {'TransactionID':'Total_Transaction', 'CustomerID':'Total_Customer', 'Qty':'Total_Qty'})
 transactionbydate['Total Amount (in 10000)'] = transactionbydate['TotalAmount'] / 100000

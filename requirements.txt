@@ -1,8 +1,1 @@
-pandas
-pandasql
-numpy
-streamlit
-plotly
-random
-scipy
-statsmodels
+numpy pandas matplotlib seaborn plotly streamlit

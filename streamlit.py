@@ -10,7 +10,7 @@ from statsmodels.stats.multicomp import pairwise_tukeyhsd
 
 # Data import
 customer = pd.read_csv('Dataset/customerbydate.csv', sep = ';')
-transaction = pd.read_csv('Dataset/transactionbydate.csv', sep = ';')
+transaction = pd.read_csv('Dataset/transactionbydate.csv', sep = ',')
 maindata = pd.read_csv('Dataset/main_table.csv', sep = ',')
 transaction2 = pd.read_csv('Dataset/transaction2.csv', sep = ',')
 transactionbydate = pd.read_csv('Dataset/transactionbydate.csv')
@@ -297,23 +297,23 @@ cluster 0 and 2, they are statistically different.
 
 
 st.write('****')
-# Trend Analysis
-st.write("<h3 style='text-align: center; color: white;'>Trend Analysis</h3>", unsafe_allow_html=True)
+# # Trend Analysis
+# st.write("<h3 style='text-align: center; color: white;'>Trend Analysis</h3>", unsafe_allow_html=True)
 
-st.markdown('''
-Next, we will proceed with trend prediction by comparing ARIMA, ARIMA with hyperparameter tuning, and Prophet models.
-We will predict the total quantity of products sold and the number of customers for the next 30 days.
-''')
+# st.markdown('''
+# Next, we will proceed with trend prediction by comparing ARIMA, ARIMA with hyperparameter tuning, and Prophet models.
+# We will predict the total quantity of products sold and the number of customers for the next 30 days.
+# ''')
 
 
-col11, col12 = st.columns(2)
+# col11, col12 = st.columns(2)
 
-with col11.expander("Transaction Trend"):
-    transaction_trend = py.line(transaction, x = 'date', y = 'sum', width = 500)
-    transaction_trend.update_layout(title = "Transaction Trend (2022)")
-    st.plotly_chart(transaction_trend)
-with col12.expander("Customer Trend"):
-    customer_trend = py.line(customer, x = 'date', y = 'count', width = 500)
-    customer_trend.update_layout(title = "Customer Trend (2022)")
-    st.plotly_chart(customer_trend)
+# with col11.expander("Transaction Trend"):
+#     transaction_trend = py.line(transaction, x = 'Date', y = 'Total_Qty', width = 500)
+#     transaction_trend.update_layout(title = "Transaction Trend (2022)")
+#     st.plotly_chart(transaction_trend)
+# with col12.expander("Customer Trend"):
+#     customer_trend = py.line(customer, x = 'date', y = 'count', width = 500)
+#     customer_trend.update_layout(title = "Customer Trend (2022)")
+#     st.plotly_chart(customer_trend)
 

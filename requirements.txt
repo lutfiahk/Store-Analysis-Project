@@ -1,1 +1,8 @@
-numpy pandas matplotlib seaborn plotly streamlit
+numpy
+pandas
+matplotlib
+seaborn
+plotly
+streamlit
+statsmodels
+scipy

@@ -5,6 +5,7 @@ import plotly.express as py
 import scipy.stats as stats
 import streamlit as st
 from statsmodels.stats.multicomp import pairwise_tukeyhsd
+import plotly.graph_objects as go
 
 
 
@@ -282,7 +283,14 @@ st.markdown('''
 Next, a **Tukey test** will be conducted to determine whether the total amount spent by customers is statistically different 
             between each other. The following are the results obtained from the Tukey test conducted:
 ''')
-st.image('Dataset/tukey_totalamount.png', width = 400)
+with st.expander("Tukey Test Result"):
+    tab1, tab2, tab3 = st.tabs(['Total Amount','Age','Income'])
+    with tab1 :
+        st.image('Dataset/tukey_totalamount.png', width = 400)
+    with tab2 :
+        st.image('Dataset/tukey_age.png', width = 400)
+    with tab3 :
+        st.image('Dataset/tukey_income.png', width = 400)
 
 st.markdown('''
 
@@ -297,23 +305,54 @@ cluster 0 and 2, they are statistically different.
 
 
 st.write('****')
-# # Trend Analysis
-# st.write("<h3 style='text-align: center; color: white;'>Trend Analysis</h3>", unsafe_allow_html=True)
+# Trend Analysis
+st.write("<h3 style='text-align: center; color: white;'>Trend Analysis</h3>", unsafe_allow_html=True)
 
-# st.markdown('''
-# Next, we will proceed with trend prediction by comparing ARIMA, ARIMA with hyperparameter tuning, and Prophet models.
-# We will predict the total quantity of products sold and the number of customers for the next 30 days.
-# ''')
+st.markdown('''
+Next, we will proceed with trend prediction by comparing ARIMA, ARIMA with hyperparameter tuning, and Prophet models.
+We will predict the total quantity of products sold and the number of customers for the next 30 days.
+''')
 
 
-# col11, col12 = st.columns(2)
+col11, col12 = st.columns(2)
 
-# with col11.expander("Transaction Trend"):
-#     transaction_trend = py.line(transaction, x = 'Date', y = 'Total_Qty', width = 500)
-#     transaction_trend.update_layout(title = "Transaction Trend (2022)")
-#     st.plotly_chart(transaction_trend)
-# with col12.expander("Customer Trend"):
-#     customer_trend = py.line(customer, x = 'date', y = 'count', width = 500)
-#     customer_trend.update_layout(title = "Customer Trend (2022)")
-#     st.plotly_chart(customer_trend)
+with col11.expander("Transaction Trend"):
+    transaction_trend = py.line(transaction, x = 'Date', y = 'Total_Qty', width = 500)
+    transaction_trend.update_layout(title = "Transaction Trend (2022)")
+    st.plotly_chart(transaction_trend)
+with col12.expander("Customer Trend"):
+    customer_trend = py.line(customer, x = 'date', y = 'count', width = 500)
+    customer_trend.update_layout(title = "Customer Trend (2022)")
+    st.plotly_chart(customer_trend)
 
+
+tab11, tab12 = st.tabs(['Quantity Prediction Model','Customer Prediction Model'])
+
+with tab11:
+    result_total_qty = pd.read_csv('Dataset/result_total_qty.csv')
+    fig = go.Figure()
+    fig.add_trace(go.Scatter(x=result_total_qty.index, y=result_total_qty['value'], mode='lines', name='Real Data', line=dict(color='blue')))
+    fig.add_trace(go.Scatter(x=result_total_qty.index, y=result_total_qty['Arima'], mode='lines', name='Arima', line=dict(color='red')))
+    fig.add_trace(go.Scatter(x=result_total_qty.index, y=result_total_qty['Arima Tuning'], mode='lines', name='Arima With Tuning', line=dict(color='green')))
+    fig.add_trace(go.Scatter(x=result_total_qty.index, y=result_total_qty['Prophet'], mode='lines', name='Prophet', line=dict(color='orange')))
+    fig.update_layout(title='Prediction with ARIMA',
+                    xaxis_title='Date',
+                    yaxis_title='Total Qty',
+                    showlegend=True)
+    st.plotly_chart(fig, use_column_width=True)
+
+
+tab11, tab12 = st.tabs(['Quantity Prediction Model','Customer Prediction Model'])
+
+with tab11:
+    prediction_totalqty = pd.read_csv('Dataset/prediction_totalqty.csv')
+    fig = go.Figure()
+    fig.add_trace(go.Scatter(x=prediction_totalqty.index, y=prediction_totalqty['value'], mode='lines', name='Real Data', line=dict(color='blue')))
+    fig.add_trace(go.Scatter(x=prediction_totalqty.index, y=prediction_totalqty['predicted_mean'], mode='lines', name='Prediction Data', line=dict(color='red')))
+
+    fig.update_layout(title='Prediction with ARIMA',
+                    xaxis_title='Date',
+                    yaxis_title='Total Qty',
+                    showlegend=True)
+
+    st.plotly_chart(fig, use_column_width=True)

@@ -335,7 +335,21 @@ with tab11:
     fig.add_trace(go.Scatter(x=result_total_qty.index, y=result_total_qty['Arima'], mode='lines', name='Arima', line=dict(color='red')))
     fig.add_trace(go.Scatter(x=result_total_qty.index, y=result_total_qty['Arima Tuning'], mode='lines', name='Arima With Tuning', line=dict(color='green')))
     fig.add_trace(go.Scatter(x=result_total_qty.index, y=result_total_qty['Prophet'], mode='lines', name='Prophet', line=dict(color='orange')))
-    fig.update_layout(title='Prediction with ARIMA',
+    fig.update_layout(title='Time Series Model Results for Total Customer Prediction',
+                    xaxis_title='Date',
+                    yaxis_title='Total Qty',
+                    showlegend=True)
+    st.plotly_chart(fig, use_column_width=True)
+
+with tab12:
+    result_total_customer = pd.read_csv('Dataset/result_total_customer.csv')
+    fig = go.Figure()
+    fig.add_trace(go.Scatter(x=result_total_customer.index, y=result_total_customer['count'], mode='lines', name='Real Data', line=dict(color='blue')))
+    fig.add_trace(go.Scatter(x=result_total_customer.index, y=result_total_customer['Arima'], mode='lines', name='Arima', line=dict(color='red')))
+    fig.add_trace(go.Scatter(x=result_total_customer.index, y=result_total_customer['Arima Tuning'], mode='lines', name='Arima With Tuning', line=dict(color='green')))
+    fig.add_trace(go.Scatter(x=result_total_customer.index, y=result_total_customer['Prophet'], mode='lines', name='Prophet', line=dict(color='orange')))
+
+    fig.update_layout(title='Time Series Model Results for Total Customer Prediction',
                     xaxis_title='Date',
                     yaxis_title='Total Qty',
                     showlegend=True)
@@ -350,9 +364,20 @@ with tab11:
     fig.add_trace(go.Scatter(x=prediction_totalqty.index, y=prediction_totalqty['value'], mode='lines', name='Real Data', line=dict(color='blue')))
     fig.add_trace(go.Scatter(x=prediction_totalqty.index, y=prediction_totalqty['predicted_mean'], mode='lines', name='Prediction Data', line=dict(color='red')))
 
-    fig.update_layout(title='Prediction with ARIMA',
+    fig.update_layout(title='Future Prediction of Total Quantity Prediction',
                     xaxis_title='Date',
                     yaxis_title='Total Qty',
                     showlegend=True)
 
+    st.plotly_chart(fig, use_column_width=True)
+
+with tab12:
+    prediction_totalcustomer = pd.read_csv('Dataset/prediction_totalcustomer.csv')
+    fig = go.Figure()
+    fig.add_trace(go.Scatter(x=prediction_totalcustomer.index, y=prediction_totalcustomer['count'], mode='lines', name='Real Data', line=dict(color='blue')))
+    fig.add_trace(go.Scatter(x=prediction_totalcustomer.index, y=prediction_totalcustomer['predicted_mean'], mode='lines', name='Prediction Data', line=dict(color='red')))
+    fig.update_layout(title='Future Prediction of Total Customer Prediction',
+                    xaxis_title='Date',
+                    yaxis_title='Total Customer',
+                    showlegend=True)
     st.plotly_chart(fig, use_column_width=True)
